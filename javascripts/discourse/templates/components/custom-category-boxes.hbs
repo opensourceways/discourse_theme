@@ -1,0 +1,27 @@
+  {{#if shouldDisplay}}
+    <div class="custom-category-boxes-container">
+
+    <span class="custom-category-boxes">
+      {{#each myCategories as |c|}}
+         <a href={{c.url}} data-category-id={{c.id}} data-notification-level={{c.notificationLevelString}} data-url={{c.url}} class="category category-box category-box-{{c.slug}} {{if c.isMuted "muted"}} {{if noCategoryStyle "no-category-boxes-style"}}">
+          <div class="category-box-inner">
+            <div class="category-logo {{if c.uploaded_logo.url "" "no-logo-present"}}" >
+                <span class="category-abbreviation">
+                 <LinkTo @route='discovery.category' @model={{getAbbreviation c.url}} @current-when="discovery.category discovery.latestCategory discovery.topCategory tags.showCategory" class="parent-box-link">
+                   <h3 title={{c.description_excerpt}}>
+                    {{category-title-before category=c}}
+                    <span class="badge-category-bg" style="background-color: #{{html-safe c.color}}"></span>
+                    {{c.name}}
+                  </h3>
+                 </LinkTo>
+                </span>
+            </div>
+          </div>
+        </a>
+      {{/each}}
+    </span>
+    </div>
+    {{else}}
+      <div class="hidden-top"></div>
+  {{/if}}
+
